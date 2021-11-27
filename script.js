@@ -3,32 +3,32 @@ const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
 const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
-//const loader = document.getElementById('loader');
+const loader = document.getElementById('loader');
 
 const car = {type:"Fiat", model:"500", color:"white"};
 
 const quoteSeed = {
     text: 'The man who does not read good books has no advantage over the man who can’t read them.',
     author: 'Mark Twain' 
-}
+};
 
 let apiQuotes = [];
 
-// // Show loading
-// function loading() {
-//     loader.hidden = false;
-//     quoteContainer.hidden = true;
-// }
+// Show loading
+function loading() {
+    loader.hidden = false;
+    quoteContainer.hidden = true;
+}
 
-// // Hide Loading
-// function complete() {
-//     loader.hidden = true;
-//     quoteContainer.hidden = false;   
-// }
+// Hide Loading
+function complete() {
+    loader.hidden = true;
+    quoteContainer.hidden = false;   
+}
 
 // Show New Quote
 function newQuote() {
-    //loading();
+    loading();
     // Pick a random quote from the apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     // Check if Author field is blank and replace it with 'Unknown'
@@ -49,7 +49,7 @@ function setQuoteandAuthor(quote) {
     }
     // Get Quote, Hide Loader
     quoteText.textContent = quote.text;
-    //complete();
+    complete();
 }
 
 // Get Quotes From API
@@ -59,7 +59,6 @@ async function getQuotes() {
     try {
         const response = await fetch(apiUrl);
         apiQuotes = await response.json();
-        console.log(apiQuotes);
         setQuoteandAuthor(quoteSeed);
     } catch (error) {
         // Catch Error Here  
