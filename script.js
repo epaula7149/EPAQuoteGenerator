@@ -41,12 +41,22 @@ function setQuoteandAuthor(quote) {
     } else {
         authorText.textContent = quote.author;
     }
+
     // Check Quote length to determine styling
-    if (quote.text.length > 120) {
+    console.log('quote.text.length= ', quote.text.length);
+    console.log('quote.text= ', quote.text);
+
+    if (quote.text.length > 140) {
         quoteText.classList.add('long-quote');
+        quoteText.classList.remove('short-quote');
+    } else if (quote.text.length > 50) {
+        quoteText.classList.remove('long-quote');
+        quoteText.classList.remove('short-quote');
     } else {
+        quoteText.classList.add('short-quote');
         quoteText.classList.remove('long-quote');
     }
+
     // Get Quote, Hide Loader
     quoteText.textContent = quote.text;
     complete();
