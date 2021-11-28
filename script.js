@@ -5,12 +5,21 @@ const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
 const loader = document.getElementById('loader');
 
-const car = {type:"Fiat", model:"500", color:"white"};
+const arrayOfQuoteSeeds = [
+{
+    'text': 'The man who does not read good books has no advantage over the man who can’t read them.',
+    'author': 'Mark Twain' 
+},
+{
+    'text': 'If you can’t complete ...    EAT!',
+    'author': 'EPA' 
+},
+{
+    'text': 'Always think others BETTER than yourself, or you will regret, DID YOU HEAR ME!, some day you will regret... TAA!',
+    'author': 'Momma' 
+} ];
 
-const quoteSeed = {
-    text: 'The man who does not read good books has no advantage over the man who can’t read them.',
-    author: 'Mark Twain' 
-};
+let seedQuote = '';
 
 let apiQuotes = [];
 
@@ -24,6 +33,12 @@ function loading() {
 function complete() {
     loader.hidden = true;
     quoteContainer.hidden = false;   
+}
+
+function pickSeedQuote() {
+    loading();
+    // Pick a random quote from arrayOfQuoteSeeds
+    seedQuote = arrayOfQuoteSeeds[Math.floor(Math.random() * arrayOfQuoteSeeds.length)];
 }
 
 // Show New Quote
@@ -43,9 +58,6 @@ function setQuoteandAuthor(quote) {
     }
 
     // Check Quote length to determine styling
-    console.log('quote.text.length= ', quote.text.length);
-    console.log('quote.text= ', quote.text);
-
     if (quote.text.length > 140) {
         quoteText.classList.add('long-quote');
         quoteText.classList.remove('short-quote');
@@ -69,7 +81,6 @@ async function getQuotes() {
     try {
         const response = await fetch(apiUrl);
         apiQuotes = await response.json();
-        setQuoteandAuthor(quoteSeed);
     } catch (error) {
         // Catch Error Here  
     }
@@ -87,6 +98,8 @@ twitterBtn.addEventListener('click', tweetQuote);
 
 // On Load
 getQuotes();
+pickSeedQuote(); 
+setQuoteandAuthor(seedQuote);
 
 
 
