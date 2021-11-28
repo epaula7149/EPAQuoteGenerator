@@ -11,7 +11,7 @@ const arrayOfQuoteSeeds = [
     'author': 'Mark Twain' 
 },
 {
-    'text': 'If you can’t complete ...    EAT!',
+    'text': 'If you can’t compete ...    EAT!',
     'author': 'EPA' 
 },
 {
